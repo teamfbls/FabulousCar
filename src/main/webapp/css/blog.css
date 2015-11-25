@@ -1,0 +1,37 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04.11.2015, 10:02:55
+    Author     : THaskioglu
+*/
+
+.container{
+    width: 960px;
+      
+    
+}
+ 
+.blog-masthead{ 
+    background-color:#269abc;
+    box-shadow: inset 0 -2px 5px rgba 0,0,0,.1;
+    
+    
+    
+}
+
+.blog-nav-item{
+    position:relative;
+    display:inline-block;
+    padding:10px;
+    font-weight: 300;
+    color: white 
+}
+
+.blog-nav-item:hover{
+text-decoration:none;
+font-weight: bold;
+color:white;
+}
