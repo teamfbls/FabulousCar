@@ -1,33 +1,20 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <%-- 
-    Document   : listall
-    Created on : 10.11.2015, 20:04:53
+    Document   : newjsp
+    Created on : 07.11.2015, 19:06:43
     Author     : THaskioglu
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-
-<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta content="IE=edge" http-equiv="X-UA-Compatible">
-        <meta content="width=device-width, initial-scale=1" name="viewport">
-        <meta content="" name="description">
-        <meta content="" name="author">
-        <link href="../../favicon.ico" rel="icon">
-        <title>Autos lÃ¶schen</title>
+
+        <title>Autos hinzufügen</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/midcss.css" rel="stylesheet">
-      
-        <!--  <link href="css/blog.css" rel="stylesheet">-->
     </head>
-
-    <body>
-              <div style="background-color: #222;">
+    <body> 
+        <div style="background-color: #222;">
             <div class="c-wrapper">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
@@ -103,14 +90,14 @@
                             <a href="#">Help</a>
                         </li>
                     </ul>
-        
+           
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                   <ul class="nav nav-sidebar">
+                    <ul class="nav nav-sidebar">
                         <li class="active">
                             <a href="index.html">
                                 Startseite
@@ -122,7 +109,7 @@
                             <a href="showcars.html">Autosanzeigen</a>
                         </li>
                         <li>
-                            <a href="newjsp.html">AutoshinzufÃ¼gen</a>
+                            <a href="newjsp.html">Autoshinzufügen</a>
                         </li>
                     </ul>
                     <ul class="nav nav-sidebar">
@@ -130,7 +117,7 @@
                             <a href="">Autos bearbeiten</a>
                         </li>
                         <li>
-                            <a href="listall.html">Autos lÃ¶schen</a>
+                            <a href="listall.html">Autos löschen</a>
                         </li>
                         <li>
                             <a href="latestentry.html">Zuletzt angelegt</a>
@@ -143,53 +130,25 @@
                         </li>
                     </ul>
                 </div>
-                    <br>
                 <br>
-                    
-        <h1>Liste mit Autos!</h1>
-         <form:form  action="/mavenproject1/listallsuc.html" method="Post">
-             <div class="table-responsive">
-        <table  class="table table-bordered">
-            
-            <tr>
-              <td>Auswahl</td>
-                    <c:forEach var="column" items="${listhead}">
-                    <td>${column}</td>
-                    </c:forEach>
-            </tr>
-             
+                <br>
+                <br>
+                <br>
+                <form:form commandName="datasearch" action="/mavenproject1/submitSearch.html" method="post">
+                   <form:select path="datacolumn">
+                        <form:options items="${mapcolumn}" />
+                    </form:select> 
+                <form:input path="datasuchwort" />
+                 <input class="btn btn-success btn-lg" type="submit" value="Search"/> 
+</form:form>
+                  </div>
+           
 
-            <c:forEach var="row"  items="${listrow}" varStatus="status" >
-                <tr> 
-                    <td><input type="radio" name="abc" value="${listrow[status.index][0]}" id="checkb${status.index+1}" /></td>
-
-                    <c:forEach var="col" items="${row}">                     
-                        <td>
-
-
-                            ${col}
-
-                        </td> 
-                    </c:forEach>
-
-
-                </tr>
-
-
-            </c:forEach>
-
-
-        </table>
-</div>
-    
-       
-        <input class="btn btn-danger btn-lg" type="submit" value="LÃ¶schen" name="buttonlo"/>
-    </form:form>
-        
-           </div>
+            </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-          <script src="js/bootstrap.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+
     </body>
 </html>

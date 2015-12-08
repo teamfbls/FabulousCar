@@ -17,11 +17,34 @@ import java.util.List;
 public class DataFetch {
 
     AccessData ac = new AccessData();
-    ResultSet re_hersteller, re_farbe, re_baujahr, re_kraftstoff, re_leistung, re_modell, re_tueren, re_zustand, re_list, re_columnlist;
+    ResultSet re_hersteller, re_farbe, re_baujahr, re_kraftstoff, re_leistung, re_modell, re_tueren, re_zustand, re_list, re_columnlist,re_columnlisttop,re_showlist,re_search;
     ResultSetMetaData rsmd;
     String dataarray[][];
     String columnarray[];
     int rowCounter = 0, columnCounter = 0;
+    
+  
+    public String[] setColumnListTop5() {
+
+        try {
+
+            re_columnlisttop = ac.listeTop5();
+            rsmd = re_columnlisttop.getMetaData();
+            columnCounter = rsmd.getColumnCount();
+            columnarray= new String [columnCounter];
+            for (int i = 0; i < columnCounter; i++) {
+
+                columnarray[i] = rsmd.getColumnName(i + 1);
+
+            }
+            return columnarray;
+        } catch (Exception ex) {
+
+            
+            return columnarray;
+        }
+
+    }
 
     public String[] setColumnList() {
 
@@ -45,6 +68,41 @@ public class DataFetch {
 
     }
 
+    public String [][] setShowList(){
+     try {
+
+            re_showlist = ac.liste();
+            while (re_showlist.next()) {
+
+                rowCounter++;
+            }
+            re_showlist.first();
+
+            rsmd = re_showlist.getMetaData();
+            columnCounter = rsmd.getColumnCount();
+            dataarray = new String[columnCounter][rowCounter]; // Achtung:Hier ist der Rowcounter vorne wegen der anzeige in html
+            rowCounter = 0;
+            for (int i = 0; i < columnCounter; i++) {
+                dataarray[i][rowCounter] = re_showlist.getString(i + 1);
+                rowCounter++;
+                while (re_showlist.next()) {
+
+                    dataarray[i][rowCounter] = re_showlist.getString(i + 1);
+                    rowCounter++;
+                }
+                re_showlist.first();
+                rowCounter = 0;
+            }
+
+            return dataarray;
+        } catch (Exception ex) {
+            System.out.print(ex);
+            return dataarray;
+        }
+    
+    
+    }
+    
     public String[][] setList() {
         try {
 
@@ -363,5 +421,72 @@ public class DataFetch {
             return dataarray;
         }
 
+    }
+    
+    public String[][] setTop(){
+    try {
+
+         re_showlist = ac.listeTop5();
+            while (re_showlist.next()) {
+
+                rowCounter++;
+            }
+            re_showlist.first();
+
+            rsmd = re_showlist.getMetaData();
+            columnCounter = rsmd.getColumnCount();
+            dataarray = new String[columnCounter][ rowCounter]; // Achtung:Hier ist der Rowcounter vorne wegen der anzeige in html
+            rowCounter = 0;
+            for (int i = 0; i < columnCounter; i++) {
+                dataarray[i][rowCounter] = re_showlist.getString(i + 1);
+                rowCounter++;
+                while (re_showlist.next()) {
+
+                    dataarray[i][rowCounter] = re_showlist.getString(i + 1);
+                    rowCounter++;
+                }
+                re_showlist.first();
+                rowCounter = 0;
+            }
+
+            return dataarray;
+        } catch (Exception ex) {
+            System.out.print(ex);
+            return dataarray;
+        }
+    
+    }
+    
+    public String[][] getSearch(String suchwort,String column){
+    try {
+    re_search = ac.listeSuche(suchwort, column);
+    while (re_search.next()) {
+
+                rowCounter++;
+            }
+            re_search.first();
+
+            rsmd = re_search.getMetaData();
+            columnCounter = rsmd.getColumnCount();
+            dataarray = new String[rowCounter][columnCounter]; // Achtung:Hier ist der Rowcounter vorne wegen der anzeige in html
+            rowCounter = 0;
+            for (int i = 0; i < columnCounter; i++) {
+                dataarray[rowCounter][i] = re_search.getString(i + 1);
+                rowCounter++;
+                while (re_search.next()) {
+
+                    dataarray[rowCounter][i] = re_search.getString(i + 1);
+                    rowCounter++;
+                }
+                re_search.first();
+                rowCounter = 0;
+            }
+
+            return dataarray;
+    }catch(Exception ex){
+    return null;
+    
+    }
+   
     }
 }

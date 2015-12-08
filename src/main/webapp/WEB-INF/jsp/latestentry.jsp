@@ -22,12 +22,13 @@
         <title>Autos löschen</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/midcss.css" rel="stylesheet">
-      
-        <!--  <link href="css/blog.css" rel="stylesheet">-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/bootstrap.js" type="text/javascript"></script>
+
     </head>
 
     <body>
-              <div style="background-color: #222;">
+        <div style="background-color: #222;">
             <div class="c-wrapper">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
@@ -41,7 +42,7 @@
                         <div class="item active">
                             <img src="pic/R8_1600x640.jpg" alt="" class="img-responsive"/>
                             <div class="carousel-caption">
-                             <h1>Effizienz</h1> 
+                                <h1>Effizienz</h1> 
                             </div>        
 
                         </div>
@@ -103,14 +104,14 @@
                             <a href="#">Help</a>
                         </li>
                     </ul>
-        
+            
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                   <ul class="nav nav-sidebar">
+                    <ul class="nav nav-sidebar">
                         <li class="active">
                             <a href="index.html">
                                 Startseite
@@ -143,53 +144,50 @@
                         </li>
                     </ul>
                 </div>
-                    <br>
                 <br>
+                <br>
+
+                        <c:forEach var="rows" items="${listrow[0]}" varStatus="status">
+                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal${status.index}">${status.index+1} Latest Entry</button><br><br>
+                            <div class="modal fade" id="myModal${status.index}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3>${status.index+1}.Latest Entry</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">  <div class="table-responsive">
+                                        <div class="col-xs-6 col-md-4">
+                                            <table  class="table  table-striped">
+                                                <c:forEach var="column" items="${listhead}" varStatus="statusHead">
+                                                    <tr><td>   ${column}</td>
+                                                        <c:forEach var="row"  items="${listrow[statusHead.index][status.index]}" varStatus="status2" >                                        
+                                                            <td>
+                                                                ${row}
+                                                            </td> 
+                                                        </tr>
+                                                    </c:forEach>
+                                                </c:forEach>
+
+                                            </table>
+                                        </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                                    </div>
+
+                </div>
+                        </c:forEach>
                     
-        <h1>Liste mit Autos!</h1>
-         <form:form  action="/mavenproject1/listallsuc.html" method="Post">
-             <div class="table-responsive">
-        <table  class="table table-bordered">
-            
-            <tr>
-              <td>Auswahl</td>
-                    <c:forEach var="column" items="${listhead}">
-                    <td>${column}</td>
-                    </c:forEach>
-            </tr>
-             
-
-            <c:forEach var="row"  items="${listrow}" varStatus="status" >
-                <tr> 
-                    <td><input type="radio" name="abc" value="${listrow[status.index][0]}" id="checkb${status.index+1}" /></td>
-
-                    <c:forEach var="col" items="${row}">                     
-                        <td>
 
 
-                            ${col}
-
-                        </td> 
-                    </c:forEach>
 
 
-                </tr>
 
-
-            </c:forEach>
-
-
-        </table>
-</div>
-    
-       
-        <input class="btn btn-danger btn-lg" type="submit" value="Löschen" name="buttonlo"/>
-    </form:form>
-        
-           </div>
+            </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-          <script src="js/bootstrap.js"></script>
+
     </body>
 </html>

@@ -5,9 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,10 +15,12 @@
         <meta content="" name="description">
         <meta content="" name="author">
         <link href="../../favicon.ico" rel="icon">
-        <title>Liste mit Autos</title>
+        <title>Startseite</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/midcss.css" rel="stylesheet">
         <link rel="stylesheet" href="dashboard.css">
+               <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+               <script src = "js/bootstrap.min.js" ></script>
         <!--  <link href="css/blog.css" rel="stylesheet">-->
     </head>
 
@@ -102,9 +101,7 @@
                             <a href="#">Help</a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-right">
-                        <input class="form-control" type="text" placeholder="Search...">
-                    </form>
+
                 </div>
             </div>
         </nav>
@@ -114,19 +111,17 @@
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
                         <li class="active">
-                            <a href="#">
-                                Overview
+                            <a href="index.html">
+                                Startseite
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
+
                         <li>
-                            <a href="#">Startseite</a>
+                            <a href="showcars.html">Autos Anzeigen</a>
                         </li>
                         <li>
-                            <a href="listall.html">Autosanzeigen</a>
-                        </li>
-                        <li>
-                            <a href="newjsp.html">Autoshinzufügen</a>
+                            <a href="newjsp.html" id="autohin">Autos Hinzufügen</a>
                         </li>
                     </ul>
                     <ul class="nav nav-sidebar">
@@ -134,13 +129,13 @@
                             <a href="">Autos bearbeiten</a>
                         </li>
                         <li>
-                            <a href="listall.html">Autos löschen</a>
+                            <a href="listall.html" id="autolo">Autos löschen</a>
                         </li>
                         <li>
-                            <a href="">Statistik</a>
+                            <a href="latestentry.html">Zuletzt angelegt</a>
                         </li>
                         <li>
-                            <a href="">Login</a>
+                            <a href="search.html">Search</a>
                         </li>
                         <li>
                             <a href="">Impressum</a>
@@ -151,7 +146,6 @@
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-            < script src = "../js/bootstrap.min.js" >
-                    < /body>
-                    < /html>
+   
+                    </body>
+                    </html>

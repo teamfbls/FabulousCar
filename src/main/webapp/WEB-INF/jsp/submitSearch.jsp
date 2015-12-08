@@ -23,7 +23,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/midcss.css" rel="stylesheet">
       
-        <!--  <link href="css/blog.css" rel="stylesheet">-->
+       
     </head>
 
     <body>
@@ -103,14 +103,14 @@
                             <a href="#">Help</a>
                         </li>
                     </ul>
-        
+  
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                   <ul class="nav nav-sidebar">
+                    <ul class="nav nav-sidebar">
                         <li class="active">
                             <a href="index.html">
                                 Startseite
@@ -146,13 +146,13 @@
                     <br>
                 <br>
                     
-        <h1>Liste mit Autos!</h1>
+      
          <form:form  action="/mavenproject1/listallsuc.html" method="Post">
              <div class="table-responsive">
         <table  class="table table-bordered">
             
             <tr>
-              <td>Auswahl</td>
+           
                     <c:forEach var="column" items="${listhead}">
                     <td>${column}</td>
                     </c:forEach>
@@ -161,7 +161,7 @@
 
             <c:forEach var="row"  items="${listrow}" varStatus="status" >
                 <tr> 
-                    <td><input type="radio" name="abc" value="${listrow[status.index][0]}" id="checkb${status.index+1}" /></td>
+                   
 
                     <c:forEach var="col" items="${row}">                     
                         <td>
@@ -183,7 +183,7 @@
 </div>
     
        
-        <input class="btn btn-danger btn-lg" type="submit" value="Löschen" name="buttonlo"/>
+    
     </form:form>
         
            </div>

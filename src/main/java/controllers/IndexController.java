@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.mavenproject1.DataFetch;
+import com.mycompany.mavenproject1.DataSearch;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.runner.Request;
 import org.springframework.web.bind.support.SessionAttributeStore;
 import org.springframework.web.context.request.WebRequest;
 
@@ -33,10 +35,11 @@ import org.springframework.web.context.request.WebRequest;
 @Controller
 public class IndexController {
 
-    String[][] dataarray1,dataarray2,dataarray3,dataarray4,dataarray5,dataarray6,dataarray7,dataarray8,dataarray9;
+    String[][] dataarray1,dataarray2,dataarray3,dataarray4,dataarray5,dataarray6,dataarray7,dataarray8,dataarray9,dataarray11,dataarray12;
     String[] dataarray10;
     int db;
     DataModel datamodel = new DataModel();
+    DataSearch ds=new DataSearch();
     List<String> list = new ArrayList<String>();
 
     @RequestMapping("/index")
@@ -45,15 +48,6 @@ public class IndexController {
 
     }
 
-    @RequestMapping("/new")
-    public String hello(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-
-        name = "Tugay";
-        model.addAttribute("name", name);
-        //returns the view name
-        return "newjsp";
-
-    }
 
     @RequestMapping(value = "/newjsp", method = RequestMethod.GET)
     public ModelAndView getAdmissionForm(ModelAndView model) {
@@ -115,30 +109,19 @@ public class IndexController {
 
     }
 
-    @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public ModelAndView succesAdmissionForm(@RequestParam(value = "name") String name, @RequestParam(value = "pass") String pass) {
 
-        if (name.equals("tugay") && pass.equals("tugay")) {
-
-            ModelAndView model = new ModelAndView("successform");
-
-            model.addObject("msg", "Dein Passwort ist:" + pass + " Name: " + name);
-
-            return model;
-
-        } else {
-
-            ModelAndView model = new ModelAndView("nosuccessform");
-
-            return model;
-
-        }
-    }
 
     @ModelAttribute("baujahr")
     public DataModel construct() {
 
         return new DataModel();
+    }
+    
+    
+    @ModelAttribute("datasearch")
+    public DataSearch constructs() {
+
+        return new  DataSearch();
     }
 
     @RequestMapping(value = "/writedata", method = RequestMethod.POST)
@@ -152,8 +135,16 @@ public class IndexController {
 
     @RequestMapping(value="/listall",method = RequestMethod.GET)
     public ModelAndView ff(ModelAndView m){
+        
+         if(list.isEmpty()){
+        
+        }else{
+        
+        list.clear();
+        }
         DataFetch df = new DataFetch();
         dataarray10=df.setColumnList();
+
         getColumnArralist();
         dataarray9=df.setList();
         m.addObject("listrowlength",dataarray9.length -(1));
@@ -161,6 +152,46 @@ public class IndexController {
         m.addObject("listrow",dataarray9);
         return m;
     }
+    
+    @RequestMapping(value="/showcars",method = RequestMethod.GET)
+    public ModelAndView ff2(ModelAndView m){
+        
+         if(list.isEmpty()){
+        
+        }else{
+        
+        list.clear();
+        }
+        DataFetch df = new DataFetch();
+        dataarray10=df.setColumnList();
+
+        getColumnArralist();
+        dataarray11=df.setShowList();
+        m.addObject("listrowlength",dataarray10.length -(1));
+        m.addObject("listhead",list);
+        m.addObject("listrow",dataarray11);
+        return m;
+    }
+    
+    @RequestMapping(value="/latestentry",method = RequestMethod.GET)
+    public ModelAndView listtop5(ModelAndView m){
+
+   if(list.isEmpty()){
+        
+        }else{
+        
+        list.clear();
+        }
+        DataFetch df = new DataFetch();
+        dataarray10=df.setColumnListTop5();
+
+        getColumnArralist();
+        dataarray9=df.setTop();
+        m.addObject("listrowlength",dataarray10.length -(1));
+        m.addObject("listhead",list);
+        m.addObject("listrow",dataarray9);
+        return m;
+}
     
     @RequestMapping(value="/listallsuc",method = RequestMethod.POST)
     public void fddd(ModelAndView m, @RequestParam(value="abc")String abc ){
@@ -174,6 +205,41 @@ public class IndexController {
         }
 
         
+    }
+    
+    @RequestMapping(value="/submitSearch",method = RequestMethod.POST)
+    public ModelAndView sreach(ModelAndView m,@ModelAttribute("datasearch") DataSearch ds){
+    DataFetch df = new DataFetch();
+    dataarray10 = df.setColumnList();
+    if(dataarray10==null){
+    
+    }
+      if(list.isEmpty()){
+        
+        }else{
+        
+        list.clear();
+        }
+      
+        dataarray10=df.setColumnList();
+
+        getColumnArralist();
+        dataarray9=df.getSearch(ds.getDatasuchwort(), ds.getDatacolumn());
+        m.addObject("listrowlength",dataarray9.length -(1));
+        m.addObject("listhead",list);
+        m.addObject("listrow",dataarray9);
+        return m;
+    
+    
+    }
+    @RequestMapping(value="/search",method = RequestMethod.GET)
+    public ModelAndView sreachpage(ModelAndView m,@ModelAttribute("datasearch") DataSearch ds){
+            
+         DataFetch df = new DataFetch();
+        dataarray10 = df.setColumnList();
+        m.addObject("mapcolumn", dataarray10);
+        m.addObject("datacolumn", ds);
+      return m;
     }
     
     public Map< String, String> rechnedropdown(Map< String, String> d, String[][] dataarray) {

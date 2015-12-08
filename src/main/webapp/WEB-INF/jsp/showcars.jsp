@@ -1,33 +1,23 @@
 <%-- 
-    Document   : listall
-    Created on : 10.11.2015, 20:04:53
+    Document   : showcars
+    Created on : 02.12.2015, 20:39:17
     Author     : THaskioglu
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta content="IE=edge" http-equiv="X-UA-Compatible">
-        <meta content="width=device-width, initial-scale=1" name="viewport">
-        <meta content="" name="description">
-        <meta content="" name="author">
-        <link href="../../favicon.ico" rel="icon">
-        <title>Autos löschen</title>
+        <title>Liste mit Autos</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/midcss.css" rel="stylesheet">
-      
-        <!--  <link href="css/blog.css" rel="stylesheet">-->
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+          <script src = "js/bootstrap.js" ></script>
     </head>
-
     <body>
-              <div style="background-color: #222;">
+        <div style="background-color: #222;">
             <div class="c-wrapper">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
@@ -41,7 +31,7 @@
                         <div class="item active">
                             <img src="pic/R8_1600x640.jpg" alt="" class="img-responsive"/>
                             <div class="carousel-caption">
-                             <h1>Effizienz</h1> 
+                                <h1>Effizienz</h1> 
                             </div>        
 
                         </div>
@@ -103,14 +93,14 @@
                             <a href="#">Help</a>
                         </li>
                     </ul>
-        
+
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                   <ul class="nav nav-sidebar">
+                    <ul class="nav nav-sidebar">
                         <li class="active">
                             <a href="index.html">
                                 Startseite
@@ -143,53 +133,41 @@
                         </li>
                     </ul>
                 </div>
-                    <br>
                 <br>
-                    
-        <h1>Liste mit Autos!</h1>
-         <form:form  action="/mavenproject1/listallsuc.html" method="Post">
-             <div class="table-responsive">
-        <table  class="table table-bordered">
-            
-            <tr>
-              <td>Auswahl</td>
-                    <c:forEach var="column" items="${listhead}">
-                    <td>${column}</td>
+                <br>
+                <br>
+                <br>
+
+
+                <div class="row">
+                    <div class="table-responsive">
+                    <c:forEach var="rows" items="${listrow[0]}" varStatus="status">
+
+                        <div class="table-responsive">
+                            <div class="col-xs-4 col-md-4">
+                                <table  class="table table-bordered">
+
+
+                                    <tr><img width="200" height="140" alt="Generic placeholder image" src="pic/forsale.png" class="img-rounded" ></tr>
+                                    <c:forEach var="column" items="${listhead}" varStatus="statusHead">
+                                        <tr><td>   ${column}</td>
+                                            <c:forEach var="row"  items="${listrow[statusHead.index][status.index]}" varStatus="status2" >                                        
+                                                <td>
+                                                    ${row}
+                                                </td> 
+                                            </tr>
+                                        </c:forEach>
+                                    </c:forEach>
+
+                                </table>
+                            </div>
+                       
+
                     </c:forEach>
-            </tr>
-             
+                </div>
+                    </div>
+            </div>
 
-            <c:forEach var="row"  items="${listrow}" varStatus="status" >
-                <tr> 
-                    <td><input type="radio" name="abc" value="${listrow[status.index][0]}" id="checkb${status.index+1}" /></td>
-
-                    <c:forEach var="col" items="${row}">                     
-                        <td>
-
-
-                            ${col}
-
-                        </td> 
-                    </c:forEach>
-
-
-                </tr>
-
-
-            </c:forEach>
-
-
-        </table>
-</div>
-    
-       
-        <input class="btn btn-danger btn-lg" type="submit" value="Löschen" name="buttonlo"/>
-    </form:form>
-        
-           </div>
-        </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-          <script src="js/bootstrap.js"></script>
+              
     </body>
 </html>

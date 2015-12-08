@@ -9,7 +9,7 @@
 <html>
     <head>
 
-        <title>Liste mit Autos</title>
+        <title>Autos hinzufügen</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/midcss.css" rel="stylesheet">
     </head>
@@ -90,27 +90,23 @@
                             <a href="#">Help</a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-right">
-                        <input class="form-control" type="text" placeholder="Search...">
-                    </form>
+               
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
+                   <ul class="nav nav-sidebar">
                         <li class="active">
-                            <a href="#">
-                                Overview
+                            <a href="index.html">
+                                Startseite
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
+
                         <li>
-                            <a href="#">Startseite</a>
-                        </li>
-                        <li>
-                            <a href="listall.html">Autosanzeigen</a>
+                            <a href="showcars.html">Autosanzeigen</a>
                         </li>
                         <li>
                             <a href="newjsp.html">Autoshinzufügen</a>
@@ -124,10 +120,10 @@
                             <a href="listall.html">Autos löschen</a>
                         </li>
                         <li>
-                            <a href="">Statistik</a>
+                            <a href="latestentry.html">Zuletzt angelegt</a>
                         </li>
                         <li>
-                            <a href="">Login</a>
+                            <a href="search.html">Search</a>
                         </li>
                         <li>
                             <a href="">Impressum</a>
@@ -139,8 +135,57 @@
                 <br>
                 <br>
 
-                <form:form commandName="baujahr" action="/mavenproject1//writedata.html" method="post">
-                    <p>
+                <form:form commandName="baujahr" action="/mavenproject1/writedata.html" method="post">
+                    <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <tr><td>Verkaufspreis: </td><td>Farbe</td></tr>
+                         <tr><td ><form:input path="datafetchverkaufspreis" /></td><td> <form:select path="datafetchFarbe">
+                                                                             <form:options items="${mapFarbe}" />
+                                                                             </form:select> </td></tr>
+                          <tr><td>Kilometer: </td><td>Türen</td></tr>
+                           <tr><td><form:input path="datafetchkilometeranzahl" /></td><td><form:select path="dataFetchTueren">
+                                                                                <form:options items="${mapTueren}" />
+                                                                                </form:select> </td></tr>
+                            <tr><td>Baujahr: </td><td>Zustände:</td></tr>
+                            <tr><td>
+                                 <form:select path="datafetchBaujahr">
+                                 <form:options items="${mapBaujahr}" />
+                                 </form:select> 
+                                </td>
+                                <td><form:radiobuttons name="radiobuttons" path="dataFetchZustand" items="${mapZustand}"/></td></tr>
+                            <tr><td>Hersteller: </td><td>Beschreibung:</td></tr>
+                              <tr><td>
+                                 <form:select path="datafetchHersteller">
+                                 <form:options items="${mapHersteller}" />
+                                 </form:select> 
+                                </td>
+                                <td><form:textarea path="dataFetchBeschreibung" rows="5" cols="30" /></td></tr>
+                                <tr><td>Kraftstoff: </td><td></td></tr>
+                                 <tr><td>
+                                 <form:select path="dataFetchKraftstoff">
+                                 <form:options items="${mapKraftstoff}" />
+                                 </form:select> 
+                                </td>
+                                <td></td></tr>
+                                 <tr><td>Leistung: </td><td></td></tr>
+                              <tr><td>
+                                 <form:select path="dataFetchLeistung">
+                                 <form:options items="${mapLeistung}" />
+                                 </form:select> 
+                                </td>
+                                <td></td></tr>
+                              <tr><td>Modell: </td><td></td></tr>
+                               <tr><td>
+                                 <form:select path="dataFetchModell">
+                                 <form:options items="${mapModell}" />
+                                 </form:select> 
+                                </td>
+                                <td><input class="btn btn-success btn-lg" type="submit" value="Hinzufügen" name="buttonhinz"/></td></tr>
+
+
+                    </table>
+                  <%--
+                                <p>
                         Verkaufspreis: <form:input path="datafetchverkaufspreis" />
                     </p>
                     <p>
@@ -179,8 +224,10 @@
                     <form:textarea path="dataFetchBeschreibung" rows="5" cols="30" />
 
                     <form:radiobuttons name="radiobuttons" path="dataFetchZustand" items="${mapZustand}"  />
+                 
                     
-                    <input class="btn btn-success btn-lg" type="submit" value="Hinzufügen"/>
+                    <input class="btn btn-success btn-lg" type="submit" value="Hinzufügen"/>  --%>
+                  </div>
                 </form:form>
 
             </div>
