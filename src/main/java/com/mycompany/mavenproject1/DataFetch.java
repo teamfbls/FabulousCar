@@ -24,9 +24,9 @@ public class DataFetch {
     int rowCounter = 0, columnCounter = 0;
     
   
-    public String[] setColumnListTop5() {
+    public String[] setColumnListTop5() throws Exception{
 
-        try {
+        
 
             re_columnlisttop = ac.listeTop5();
             rsmd = re_columnlisttop.getMetaData();
@@ -38,18 +38,13 @@ public class DataFetch {
 
             }
             return columnarray;
-        } catch (Exception ex) {
-
-            
-            return columnarray;
-        }
+  
 
     }
 
-    public String[] setColumnList() {
+    public String[] setColumnList()throws Exception {
 
-        try {
-
+       
             re_columnlist = ac.liste();
             rsmd = re_columnlist.getMetaData();
             columnCounter = rsmd.getColumnCount();
@@ -60,17 +55,12 @@ public class DataFetch {
 
             }
             return columnarray;
-        } catch (Exception ex) {
 
-            
-            return columnarray;
-        }
 
     }
 
-    public String [][] setShowList(){
-     try {
-
+    public String [][] setShowList()throws Exception{
+     
             re_showlist = ac.liste();
             while (re_showlist.next()) {
 
@@ -95,16 +85,13 @@ public class DataFetch {
             }
 
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
+      
     
     
     }
     
-    public String[][] setList() {
-        try {
+    public String[][] setList()throws Exception {
+        
 
             re_list = ac.liste();
             while (re_list.next()) {
@@ -130,17 +117,12 @@ public class DataFetch {
             }
 
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
-
+ 
     }
 
-    public String[][] setDataBaujahr() {
+    public String[][] setDataBaujahr()throws Exception {
 
-        try {
-
+        
             re_baujahr = ac.listeBaujahr();
             while (re_baujahr.next()) {
 
@@ -165,16 +147,13 @@ public class DataFetch {
             }
 
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
+  
 
     }
 
-    public String[][] setDataFarbe() {
+    public String[][] setDataFarbe() throws Exception{
 
-        try {
+       
 
             re_farbe = ac.listeFarbe();
             while (re_farbe.next()) {
@@ -202,16 +181,12 @@ public class DataFetch {
             }
 
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
-
+ 
     }
 
-    public String[][] setDataHersteller() {
+    public String[][] setDataHersteller()throws Exception {
 
-        try {
+       
 
             re_hersteller = ac.listeHersteller();
             while (re_hersteller.next()) {
@@ -237,16 +212,12 @@ public class DataFetch {
 
             }
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
-
+  
     }
 
-    public String[][] setDataKraftstoff() {
+    public String[][] setDataKraftstoff()throws Exception {
 
-        try {
+      
 
             re_kraftstoff = ac.listeKraftstoff();
             while (re_kraftstoff.next()) {
@@ -272,16 +243,12 @@ public class DataFetch {
 
             }
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
+  
 
     }
 
-    public String[][] setDataLeistung() {
+    public String[][] setDataLeistung()throws Exception {
 
-        try {
 
             re_leistung = ac.listeLeistung();
             while (re_leistung.next()) {
@@ -307,16 +274,13 @@ public class DataFetch {
 
             }
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
+ 
 
     }
 
-    public String[][] setDataModell() {
+    public String[][] setDataModell()throws Exception {
 
-        try {
+      
 
             re_modell = ac.listeModell();
             while (re_modell.next()) {
@@ -343,17 +307,13 @@ public class DataFetch {
 
             }
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
+   
 
     }
 
-    public String[][] setDataTueren() {
+    public String[][] setDataTueren()throws Exception {
 
-        try {
-
+       
             re_tueren = ac.listeTueren();
             while (re_tueren.next()) {
 
@@ -378,16 +338,13 @@ public class DataFetch {
 
             }
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
+     
 
     }
 
-    public String[][] setDataZustand() {
+    public String[][] setDataZustand()throws Exception {
 
-        try {
+        
 
             re_zustand = ac.listeZustand();
             while (re_zustand.next()) {
@@ -416,15 +373,12 @@ public class DataFetch {
             }
 
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
+     
 
     }
     
-    public String[][] setTop(){
-    try {
+    public String[][] setTop()throws Exception{
+    
 
          re_showlist = ac.listeTop5();
             while (re_showlist.next()) {
@@ -450,15 +404,12 @@ public class DataFetch {
             }
 
             return dataarray;
-        } catch (Exception ex) {
-            System.out.print(ex);
-            return dataarray;
-        }
+    
     
     }
     
-    public String[][] getSearch(String suchwort,String column){
-    try {
+    public String[][] getSearch(String suchwort,String column)throws Exception{
+    
     re_search = ac.listeSuche(suchwort, column);
     while (re_search.next()) {
 
@@ -483,10 +434,6 @@ public class DataFetch {
             }
 
             return dataarray;
-    }catch(Exception ex){
-    return null;
-    
-    }
-   
+  
     }
 }

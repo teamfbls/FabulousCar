@@ -21,17 +21,16 @@ public class DeleteData extends DBcon{
     
     }
     
-    public void doDeleteData(){
+    public void doDeleteData()throws Exception{
     
-         try {
+         if(id.isEmpty()){
+         throw new Exception();
+         }
 
             deleteStatement = "Delete from auto where auto.id="+id+"";
             getStmt();
             stmt.executeUpdate( deleteStatement);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-
-        } finally {
+  
 
             if (stmt != null) {
 
@@ -39,7 +38,6 @@ public class DeleteData extends DBcon{
 
             }
 
-        }
     
     }
     

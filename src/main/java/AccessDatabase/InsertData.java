@@ -40,8 +40,9 @@ public class InsertData extends DBcon {
 
     }
 
-    public void doInsertData() {
+    public void doInsertData() throws Exception{
 
+        
         beschreibung = datamodel.getdataFetchBeschreibung();
         kraftstoff = datamodel.getdataFetchKraftstoff();
         leistung = datamodel.getdataFetchLeistung();
@@ -55,25 +56,36 @@ public class InsertData extends DBcon {
         baujahr = datamodel.getdatafetchBaujahr();
         erstelldatum = dateFormat.format(date);
         
-
-        try {
-
+        
+        Integer.parseInt(verkaufspreis);
+        Integer.parseInt(kilometeranzahl);
+        if(zustand.isEmpty()
+                ||kraftstoff.isEmpty()
+                ||leistung.isEmpty()
+                ||modell.isEmpty()
+                ||tueren.isEmpty()
+                ||zustand.isEmpty()
+                ||farbe.isEmpty()
+                ||hersteller.isEmpty()
+                ||baujahr.isEmpty()
+                ||erstelldatum.isEmpty()){
+        
+        throw new Exception();
+        }
+        
+      
             insertStatement = "INSERT INTO Auto(Verkaufspreis,HerstellerModellid,Baujahrid,Farbeid,Tuerenid,Leistungid,Kilometerzahl,Kraftstoffid,Zustandid,Beschreibung,Erstellungsdatum)"
                     + "values('" + verkaufspreis + "','" + modell + "','" + baujahr + "','" + farbe + "','" + tueren + "','" + leistung + "','" + kilometeranzahl + "','" + kraftstoff + "','" + zustand + "','" + beschreibung + "','" + erstelldatum + "')";
             getStmt();
             stmt.executeUpdate(insertStatement);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-
-        } finally {
-
+   
             if (stmt != null) {
 
                 disConnectDB();
 
             }
 
-        }
+        
 
     }
 

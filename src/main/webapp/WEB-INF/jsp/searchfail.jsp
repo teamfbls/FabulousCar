@@ -1,23 +1,23 @@
 <%-- 
-    Document   : showcars
-    Created on : 02.12.2015, 20:39:17
+    Document   : successform
+    Created on : 08.11.2015, 10:37:13
     Author     : THaskioglu
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Liste mit Autos</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="refresh" content="3;url=http://localhost:8080/mavenproject1/search.html" />
+                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+          <script src="js/bootstrap.js"></script>
+              <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/midcss.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src = "js/bootstrap.js" ></script>
+        <title>Searchfail</title>
     </head>
     <body>
-        <div style="background-color: #222;">
+              <div style="background-color: #222;">
             <div class="c-wrapper">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
@@ -31,7 +31,7 @@
                         <div class="item active">
                             <img src="pic/R8_1600x640.jpg" alt="" class="img-responsive"/>
                             <div class="carousel-caption">
-                                <h1>Effizienz</h1> 
+                             <h1>Effizienz</h1> 
                             </div>        
 
                         </div>
@@ -93,14 +93,14 @@
                             <a href="#">Help</a>
                         </li>
                     </ul>
-
+        
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
+                   <ul class="nav nav-sidebar">
                         <li class="active">
                             <a href="index.html">
                                 Startseite
@@ -133,43 +133,10 @@
                         </li>
                     </ul>
                 </div>
+                    <br>
                 <br>
-                <br>
-                <br>
-                <br>
-
-                <div class="container-fluid">
-
-
-
-                    <c:forEach var="rows" items="${listrow[0]}" varStatus="status">
-                        
-                        <div class="row">
-                            <div class="table-responsive">
-                                <div class="col-xs-4 col-md-6">
-                                    <table  class="table table-bordered">
-
-
-                                        <tr><img width="200" height="140" alt="Generic placeholder image" src="pic/forsale.png" class="img-rounded" ></tr>
-                                        <c:forEach var="column" items="${listhead}" varStatus="statusHead">
-                                            <tr><td>   ${column}</td>
-                                                <c:forEach var="row"  items="${listrow[statusHead.index][status.index]}" varStatus="status2" >                                        
-                                                    <td>
-                                                        ${row}
-                                                    </td> 
-                                                </tr>
-                                            </c:forEach>
-                                        </c:forEach>
-
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-
-
-                </div>
-
-
-                </body>
-                </html>
+        <h1>Leider nichts gefunden</h1>
+        <h2>Redirect in 3 seconds</h2>
+       
+    </body>
+</html>
