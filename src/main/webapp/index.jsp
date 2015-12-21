@@ -118,7 +118,7 @@
                         </li>
 
                         <li>
-                            <a href="showcars.html">Autos Anzeigen</a>
+                            <a href="showcars.html" id="autoan">Autos Anzeigen</a>
                         </li>
                         <li>
                             <a href="newjsp.html" id="autohin">Autos Hinzufügen</a>
@@ -132,10 +132,10 @@
                             <a href="listall.html" id="autolo">Autos löschen</a>
                         </li>
                         <li>
-                            <a href="latestentry.html">Zuletzt angelegt</a>
+                            <a href="latestentry.html" id="autolas">Zuletzt angelegt</a>
                         </li>
                         <li>
-                            <a href="search.html">Search</a>
+                            <a href="search.html" id="autosearch">Search</a>
                         </li>
                         <li>
                             <a href="">Impressum</a>
