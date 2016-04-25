@@ -118,6 +118,7 @@
                         </li>
                         <li>
                             <a href="listall.html">Autos löschen</a>
+                           
                         </li>
                         <li>
                             <a href="latestentry.html">Zuletzt angelegt</a>
@@ -138,6 +139,9 @@
                 <form:form commandName="baujahr" action="/mavenproject1/writedata.html" method="post">
                     <div class="table-responsive">
                     <table class="table table-borderless">
+                          <tr><td><form:select path="datafetchfile">
+                          <form:options items="${mapFile}" />
+                          </form:select></td></tr>
                         <tr><td>Verkaufspreis: </td><td>Farbe</td></tr>
                          <tr><td ><form:input path="datafetchverkaufspreis" /></td><td> <form:select path="datafetchFarbe">
                                                                              <form:options items="${mapFarbe}" />

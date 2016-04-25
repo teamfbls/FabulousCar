@@ -22,8 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.mavenproject1.DataFetch;
 import com.mycompany.mavenproject1.DataSearch;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.junit.runner.Request;
 import org.springframework.web.bind.support.SessionAttributeStore;
 import org.springframework.web.context.request.WebRequest;
@@ -35,12 +39,18 @@ import org.springframework.web.context.request.WebRequest;
 @Controller
 public class IndexController {
 
-    String[][] dataarray1, dataarray2, dataarray3, dataarray4, dataarray5, dataarray6, dataarray7, dataarray8, dataarray9, dataarray11, dataarray12;
+    String[][] dataarray1, dataarray2, dataarray3, dataarray4, dataarray5, dataarray6, dataarray7, dataarray8, dataarray9, dataarray11, dataarray12, datafilearray;
     String[] dataarray10;
     int db;
     DataModel datamodel = new DataModel();
     DataSearch ds = new DataSearch();
     List<String> list = new ArrayList<String>();
+
+    String contenttype;
+    File file, file2;
+    File[] filelist;
+    String dataname;
+    String path2;
 
     @RequestMapping("/index")
     public String index() {
@@ -49,9 +59,13 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/newjsp", method = RequestMethod.GET)
-    public ModelAndView getAdmissionForm(ModelAndView model) {
+    public ModelAndView getAdmissionForm(ModelAndView model, HttpServletRequest request) {
         try {
             DataFetch df = new DataFetch();
+
+            Map<String, String> mapFile = new HashMap<String, String>();
+            datafilearray = picupload(request);
+            mapFile = rechnedropdown(mapFile, datafilearray);
 
             Map< String, String> mapBaujahr = new HashMap<String, String>();
             dataarray1 = df.setDataBaujahr();
@@ -104,6 +118,8 @@ public class IndexController {
             model.addObject("dataFetchBeschreibung", datamodel);
             model.addObject("datafetchverkaufspreis", datamodel);
             model.addObject("datafetchkilometeranzahl", datamodel);
+            model.addObject("mapFile", mapFile);
+            model.addObject("datafetchfile", datamodel);
             return model;
         } catch (Exception ex) {
             model.addObject("errorcode", ex.toString());
@@ -126,11 +142,12 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/writedata", method = RequestMethod.POST)
-    public ModelAndView writeDataForm(@ModelAttribute("baujahr") DataModel bau) {
+    public ModelAndView writeDataForm(@ModelAttribute("baujahr") DataModel bau, HttpServletRequest request) {
         ModelAndView model = new ModelAndView("writedata");
-        try {
 
-            InsertData ins = new InsertData(bau);
+        try {
+            String chosenpath=searchpic(request, bau);
+            InsertData ins = new InsertData(bau,chosenpath);
             ins.doInsertData();
             return model;
         } catch (Exception ex) {
@@ -184,6 +201,7 @@ public class IndexController {
             m.addObject("listrowlength", dataarray10.length - (1));
             m.addObject("listhead", list);
             m.addObject("listrow", dataarray11);
+           
             return m;
         } catch (Exception ex) {
             m.addObject("errorcode", ex.toString());
@@ -221,12 +239,12 @@ public class IndexController {
     public ModelAndView fddd(ModelAndView m, @RequestParam(value = "abc") String abc) {
         try {
             if (abc.isEmpty()) {
-                 m.setViewName("nosuccessform");
+                m.setViewName("nosuccessform");
                 return m;
             } else {
                 DeleteData del = new DeleteData((abc));
                 del.doDeleteData();
-                 m.setViewName("listallsuc");
+                m.setViewName("listallsuc");
                 return m;
             }
         } catch (Exception ex) {
@@ -260,12 +278,11 @@ public class IndexController {
             m.addObject("listhead", list);
             m.addObject("listrow", dataarray9);
             return m;
-        } catch(ArrayIndexOutOfBoundsException arx){
-         m.setViewName("searchfail");
+        } catch (ArrayIndexOutOfBoundsException arx) {
+            m.setViewName("searchfail");
             return m;
-        }
-        catch (Exception ex) {
-            
+        } catch (Exception ex) {
+
             m.addObject("errorcode", ex.toString());
             m.setViewName("nosuccessform");
             return m;
@@ -286,6 +303,54 @@ public class IndexController {
             m.setViewName("nosuccessform");
             return m;
         }
+    }
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public ModelAndView uploadpic(HttpServletRequest request, ModelAndView model) {
+
+        String path = request.getRealPath("/upload_images");
+        path = path.substring(0, path.indexOf("\\mavenproject1"));
+        path = path + "\\mavenproject1\\mavenproject1\\src\\main\\webapp\\upload_images";
+        DiskFileItemFactory dfif = new DiskFileItemFactory();
+        ServletFileUpload uploader = new ServletFileUpload(dfif);
+
+        try {
+
+            List<FileItem> fit = uploader.parseRequest(request);
+            for (FileItem fileItem : fit) {
+                try {
+                    contenttype = fileItem.getContentType();
+                    contenttype = contenttype.substring(6, contenttype.length());
+                    if (fileItem.isFormField() == false && contenttype.equals("jpeg") || contenttype.equals("png")) {
+                        file = new File(path + "/" + fileItem.getName());
+                        fileItem.write(file);
+
+                    }
+                } catch (Exception ey) {
+
+                }
+
+            }
+            return model;
+        } catch (Exception ex) {
+
+            if (file.exists()) {
+
+                file.delete();
+            }
+
+            model.addObject("errorcode", ex.toString());
+            model.setViewName("nosuccessform");
+            return model;
+        }
+
+    }
+
+    @RequestMapping(value = "/uploadform", method = RequestMethod.GET)
+    public ModelAndView showupload(ModelAndView m) {
+
+        return m;
+
     }
 
     public Map< String, String> rechnedropdown(Map< String, String> d, String[][] dataarray) {
@@ -314,4 +379,47 @@ public class IndexController {
         }
         return list;
     }
+
+    public String[][] picupload(HttpServletRequest request) {
+        String path = request.getRealPath("/upload_images");
+        path = path.substring(0, path.indexOf("\\mavenproject1"));
+        path = path + "\\mavenproject1\\mavenproject1\\src\\main\\webapp\\upload_images";
+        file2 = new File(path);
+        filelist = file2.listFiles();
+        String[][] filear = new String[filelist.length][filelist.length];
+        for (int i = 0; i < filelist.length; i++) {
+            path2 = filelist[i].getName();
+            dataname = path2;
+            for (int j = 0; j < filelist.length; j++) {
+
+                filear[j][i] = dataname;
+
+            }
+
+        }
+
+        return filear;
+
+    }
+
+    public String searchpic(HttpServletRequest request, DataModel bau) {
+        String path = request.getRealPath("/upload_images");
+        path = path.substring(0, path.indexOf("\\mavenproject1"));
+        path = path + "\\mavenproject1\\mavenproject1\\src\\main\\webapp\\upload_images";
+        file2 = new File(path);
+        filelist = file2.listFiles();
+
+        for (int i = 0; i < filelist.length; i++) {
+            path2 = filelist[i].getName();
+            if (path2.equals(bau.getDatafetchfile())) {
+
+                path = path + "\\"+path2;
+                path = path.replace("\\", "\\\\");
+                
+                return path;
+            } 
+        }
+       return "";
+    }
+
 }

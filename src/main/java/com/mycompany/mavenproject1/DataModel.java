@@ -16,10 +16,19 @@ public class DataModel {
             dataFetchBeschreibung,
             datafetchkilometeranzahl,
             datafetchverkaufspreis,
-            datafetcherstelldatum;
-    String columnarray[];
+            datafetcherstelldatum,
+            datafetchfile;
+   String columnarray[];
          int a;   
     int id;
+    public void setDatafetchfile(String datafetchfile) {
+        this.datafetchfile = datafetchfile;
+    }
+
+    public String getDatafetchfile() {
+        return datafetchfile;
+    }
+ 
     
     
   

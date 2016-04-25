@@ -25,7 +25,8 @@ public class AccessData extends DBcon {
 "tueren.Tuerenanzahl as Tuerenanzahl,\n" +
 "zustand.Zustand as Zustand,\n" +
 "auto.Beschreibung as Beschreibung,\n"+
-"auto.Erstellungsdatum as Erstellungsdatum\n" +
+"auto.Erstellungsdatum as Erstellungsdatum,\n" +
+ "auto.pic_path as Picturepfad\n"+
 "from auto \n" +
 "inner join baujahr on baujahr.Baujahrid=auto.Baujahrid \n" +
 "inner join Farbe on Farbe.Farbeid=auto.Farbeid\n" +

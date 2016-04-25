@@ -1,23 +1,14 @@
-<%-- 
-    Document   : showcars
-    Created on : 02.12.2015, 20:39:17
-    Author     : THaskioglu
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE html>
+
 <html>
     <head>
-        <title>Liste mit Autos</title>
+
+        <title>Upload Picture</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/midcss.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src = "js/bootstrap.js" ></script>
     </head>
-    <body>
+    <body> 
         <div style="background-color: #222;">
             <div class="c-wrapper">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -32,7 +23,7 @@
                         <div class="item active">
                             <img src="pic/R8_1600x640.jpg" alt="" class="img-responsive"/>
                             <div class="carousel-caption">
-                                <h1>Effizienz</h1> 
+                             <h1>Effizienz</h1> 
                             </div>        
 
                         </div>
@@ -94,14 +85,14 @@
                             <a href="#">Help</a>
                         </li>
                     </ul>
-
+               
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
+                   <ul class="nav nav-sidebar">
                         <li class="active">
                             <a href="index.html">
                                 Startseite
@@ -113,7 +104,7 @@
                             <a href="showcars.html">Autosanzeigen</a>
                         </li>
                         <li>
-                            <a href="newjsp.html">AutoshinzufÃ¼gen</a>
+                            <a href="newjsp.html">Autoshinzufügen</a>
                         </li>
                     </ul>
                     <ul class="nav nav-sidebar">
@@ -121,7 +112,7 @@
                             <a href="">Autos bearbeiten</a>
                         </li>
                         <li>
-                            <a href="listall.html">Autos lÃ¶schen</a>
+                            <a href="listall.html">Autos löschen</a>
                         </li>
                         <li>
                             <a href="latestentry.html">Zuletzt angelegt</a>
@@ -139,52 +130,22 @@
                 <br>
                 <br>
 
-                <div class="container-fluid">
+             <form:form method="post" action="/mavenproject1/upload.html" enctype="multipart/form-data">
 
+		
 
+		Please select a file to upload : <input type="file" name="file" />
+		<input type="submit" value="upload" />
+		
 
-                    <c:forEach var="rows" items="${listrow[0]}" varStatus="status">
-                        
-                        <div class="row">
-                            <div class="table-responsive">
-                                <div class="col-xs-4 col-md-6">
-                                    <table  class="table table-bordered">
+	</form:form>
+                
 
+            </div>
+        </div>
 
-                                        <tr><img width="200" height="140" alt="Generic placeholder image" src="pic/forsale.png" class="img-rounded" ></tr>
-                                        <c:forEach var="column" items="${listhead}" varStatus="statusHead">
-                                            <tr><td>   ${column}</td>
-                                                <c:forEach var="row"  items="${listrow[statusHead.index][status.index]}" varStatus="status2" >    
-                                                    <c:set var="ind" value="${statusHead.index}"/>
-                                                    <td>
-                                                        ${row}
-                                                    </td> 
-                                                    <c:if test="${ind ==13}">
-                                                    <td>
-                                                        <c:set var="g" value="webapp\\"></c:set>
-                                                        <c:set var="path" value="${fn:substringAfter(row,g)}"></c:set>
-                                                       
-                                                            <img width="200" height="140" alt="Generic placeholder image" src="${fn:replace(path,"\\","//")}" class="img-rounded" >
-                                                            
-                                                            
-                                                        
-                                                        
-                                                    </td>
-                                                    </c:if>
-                                                </tr>
-                                            </c:forEach>
-                                               
-                                        </c:forEach>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="js/bootstrap.js"></script>
 
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-
-
-                </div>
-
-
-                </body>
-                </html>
+    </body>
+</html>

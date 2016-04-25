@@ -29,12 +29,13 @@ public class InsertData extends DBcon {
             beschreibung,
             kilometeranzahl,
             verkaufspreis,
-            erstelldatum;
+            erstelldatum,
+            chosenpath;
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date date = new Date();
 
-    public InsertData(DataModel datamodel) {
-
+    public InsertData(DataModel datamodel,String chosenpath) {
+        this.chosenpath=chosenpath;
         this.datamodel = datamodel;
         connectDB();
 
@@ -74,8 +75,8 @@ public class InsertData extends DBcon {
         }
         
       
-            insertStatement = "INSERT INTO Auto(Verkaufspreis,HerstellerModellid,Baujahrid,Farbeid,Tuerenid,Leistungid,Kilometerzahl,Kraftstoffid,Zustandid,Beschreibung,Erstellungsdatum)"
-                    + "values('" + verkaufspreis + "','" + modell + "','" + baujahr + "','" + farbe + "','" + tueren + "','" + leistung + "','" + kilometeranzahl + "','" + kraftstoff + "','" + zustand + "','" + beschreibung + "','" + erstelldatum + "')";
+            insertStatement = "INSERT INTO Auto(Verkaufspreis,HerstellerModellid,Baujahrid,Farbeid,Tuerenid,Leistungid,Kilometerzahl,Kraftstoffid,Zustandid,Beschreibung,Erstellungsdatum,pic_path)"
+                    + "values('" + verkaufspreis + "','" + modell + "','" + baujahr + "','" + farbe + "','" + tueren + "','" + leistung + "','" + kilometeranzahl + "','" + kraftstoff + "','" + zustand + "','" + beschreibung + "','" + erstelldatum + "','"+chosenpath+"')";
             getStmt();
             stmt.executeUpdate(insertStatement);
    
