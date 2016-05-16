@@ -14,7 +14,7 @@ import java.util.Date;
  *
  * @author THaskioglu
  */
-public class InsertData extends DBcon {
+public class InsertData extends DBcon implements InsertDataInterface{
 
     DataModel datamodel;
     String insertStatement,
@@ -41,6 +41,7 @@ public class InsertData extends DBcon {
 
     }
 
+    @Override
     public void doInsertData() throws Exception{
 
         

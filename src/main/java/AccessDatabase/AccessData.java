@@ -1,6 +1,6 @@
 package AccessDatabase;
 import java.sql.*;
-public class AccessData extends DBcon {
+public class AccessData extends DBcon implements AccessDataInterface{
  
     private ResultSet re_hersteller, re_farbe, re_baujahr, re_kraftstoff, re_leistung, re_modell, re_tueren, re_zustand,result,re_top,re_suche;  
     public AccessData(){
@@ -9,6 +9,7 @@ public class AccessData extends DBcon {
     
     } 
     
+    @Override
     public ResultSet liste()throws Exception{
   
         try{
@@ -42,6 +43,7 @@ public class AccessData extends DBcon {
   
         return null;}
   }
+    @Override
     public ResultSet listeBaujahr()throws Exception{
   
         try{
@@ -55,6 +57,7 @@ public class AccessData extends DBcon {
   
         return null;}
   }
+    @Override
     public ResultSet listeFarbe()throws Exception{
   
         try{
@@ -69,6 +72,7 @@ public class AccessData extends DBcon {
   
         return null;}
   }
+    @Override
     public ResultSet listeHersteller()throws Exception{
   
         try{
@@ -83,6 +87,7 @@ public class AccessData extends DBcon {
         return null;
         }
   }
+    @Override
     public ResultSet listeKraftstoff()throws Exception{
   
         try{
@@ -96,6 +101,7 @@ public class AccessData extends DBcon {
         return null;
         }
   }
+    @Override
     public ResultSet listeLeistung()throws Exception{
   
         try{
@@ -109,6 +115,7 @@ public class AccessData extends DBcon {
         return null;
         }
   }
+    @Override
     public ResultSet listeModell()throws Exception{
   
         try{
@@ -121,6 +128,7 @@ public class AccessData extends DBcon {
   
         return null;}
   }
+    @Override
     public ResultSet listeTueren()throws Exception{
   
         try{
@@ -134,6 +142,7 @@ public class AccessData extends DBcon {
         return null;
         }
   }
+    @Override
     public ResultSet listeZustand()throws Exception{
   
         try{

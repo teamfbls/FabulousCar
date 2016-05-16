@@ -9,7 +9,7 @@ package AccessDatabase;
  *
  * @author THaskioglu
  */
-public class DeleteData extends DBcon{
+public class DeleteData extends DBcon implements DeleteDataInterface{
     
     String id,deleteStatement;
     
@@ -21,6 +21,7 @@ public class DeleteData extends DBcon{
     
     }
     
+    @Override
     public void doDeleteData()throws Exception{
     
          if(id.isEmpty()){
