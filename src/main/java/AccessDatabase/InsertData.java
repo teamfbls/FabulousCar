@@ -14,8 +14,9 @@ import java.util.Date;
  *
  * @author THaskioglu
  */
-public class InsertData extends DBcon implements InsertDataInterface{
+public class InsertData implements InsertDataInterface{
 
+    DBcon dbconnection=DBcon.getInstance();
     DataModel datamodel;
     String insertStatement,
             baujahr,
@@ -37,7 +38,7 @@ public class InsertData extends DBcon implements InsertDataInterface{
     public InsertData(DataModel datamodel,String chosenpath) {
         this.chosenpath=chosenpath;
         this.datamodel = datamodel;
-        connectDB();
+        dbconnection.connectDB();
 
     }
 
@@ -78,12 +79,12 @@ public class InsertData extends DBcon implements InsertDataInterface{
       
             insertStatement = "INSERT INTO Auto(Verkaufspreis,HerstellerModellid,Baujahrid,Farbeid,Tuerenid,Leistungid,Kilometerzahl,Kraftstoffid,Zustandid,Beschreibung,Erstellungsdatum,pic_path)"
                     + "values('" + verkaufspreis + "','" + modell + "','" + baujahr + "','" + farbe + "','" + tueren + "','" + leistung + "','" + kilometeranzahl + "','" + kraftstoff + "','" + zustand + "','" + beschreibung + "','" + erstelldatum + "','"+chosenpath+"')";
-            getStmt();
-            stmt.executeUpdate(insertStatement);
+            dbconnection.getStmt();
+            dbconnection.stmt.executeUpdate(insertStatement);
    
-            if (stmt != null) {
+            if (dbconnection.stmt != null) {
 
-                disConnectDB();
+                dbconnection.disConnectDB();
 
             }
 

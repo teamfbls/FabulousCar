@@ -9,15 +9,15 @@ package AccessDatabase;
  *
  * @author THaskioglu
  */
-public class DeleteData extends DBcon implements DeleteDataInterface{
+public class DeleteData implements DeleteDataInterface{
     
     String id,deleteStatement;
-    
+    DBcon dbconnection=DBcon.getInstance();
     
     public DeleteData( String id){
     
     this.id=id;
-     connectDB();
+     dbconnection.connectDB();
     
     }
     
@@ -29,13 +29,13 @@ public class DeleteData extends DBcon implements DeleteDataInterface{
          }
 
             deleteStatement = "Delete from auto where auto.id="+id+"";
-            getStmt();
-            stmt.executeUpdate( deleteStatement);
+            dbconnection.getStmt();
+            dbconnection.stmt.executeUpdate( deleteStatement);
   
 
-            if (stmt != null) {
+            if (dbconnection.stmt != null) {
 
-                disConnectDB();
+                dbconnection.disConnectDB();
 
             }
 

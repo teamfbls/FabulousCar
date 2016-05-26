@@ -18,6 +18,150 @@ public class DataFetch {
 
     AccessData ac = new AccessData();
     ResultSet re_hersteller, re_farbe, re_baujahr, re_kraftstoff, re_leistung, re_modell, re_tueren, re_zustand, re_list, re_columnlist,re_columnlisttop,re_showlist,re_search;
+
+    public void setRe_hersteller(ResultSet re_hersteller) {
+        this.re_hersteller = re_hersteller;
+    }
+
+    public void setRe_farbe(ResultSet re_farbe) {
+        this.re_farbe = re_farbe;
+    }
+
+    public void setRe_baujahr(ResultSet re_baujahr) {
+        this.re_baujahr = re_baujahr;
+    }
+
+    public void setRe_kraftstoff(ResultSet re_kraftstoff) {
+        this.re_kraftstoff = re_kraftstoff;
+    }
+
+    public void setRe_leistung(ResultSet re_leistung) {
+        this.re_leistung = re_leistung;
+    }
+
+    public void setRe_modell(ResultSet re_modell) {
+        this.re_modell = re_modell;
+    }
+
+    public void setRe_tueren(ResultSet re_tueren) {
+        this.re_tueren = re_tueren;
+    }
+
+    public void setRe_zustand(ResultSet re_zustand) {
+        this.re_zustand = re_zustand;
+    }
+
+    public void setRe_list(ResultSet re_list) {
+        this.re_list = re_list;
+    }
+
+    public void setRe_columnlist(ResultSet re_columnlist) {
+        this.re_columnlist = re_columnlist;
+    }
+
+    public void setRe_columnlisttop(ResultSet re_columnlisttop) {
+        this.re_columnlisttop = re_columnlisttop;
+    }
+
+    public void setRe_showlist(ResultSet re_showlist) {
+        this.re_showlist = re_showlist;
+    }
+
+    public void setRe_search(ResultSet re_search) {
+        this.re_search = re_search;
+    }
+
+    public void setRsmd(ResultSetMetaData rsmd) {
+        this.rsmd = rsmd;
+    }
+
+    public void setDataarray(String[][] dataarray) {
+        this.dataarray = dataarray;
+    }
+
+    public void setColumnarray(String[] columnarray) {
+        this.columnarray = columnarray;
+    }
+
+    public void setRowCounter(int rowCounter) {
+        this.rowCounter = rowCounter;
+    }
+
+    public void setColumnCounter(int columnCounter) {
+        this.columnCounter = columnCounter;
+    }
+
+    public ResultSet getRe_hersteller() {
+        return re_hersteller;
+    }
+
+    public ResultSet getRe_farbe() {
+        return re_farbe;
+    }
+
+    public ResultSet getRe_baujahr() {
+        return re_baujahr;
+    }
+
+    public ResultSet getRe_kraftstoff() {
+        return re_kraftstoff;
+    }
+
+    public ResultSet getRe_leistung() {
+        return re_leistung;
+    }
+
+    public ResultSet getRe_modell() {
+        return re_modell;
+    }
+
+    public ResultSet getRe_tueren() {
+        return re_tueren;
+    }
+
+    public ResultSet getRe_zustand() {
+        return re_zustand;
+    }
+
+    public ResultSet getRe_list() {
+        return re_list;
+    }
+
+    public ResultSet getRe_columnlist() {
+        return re_columnlist;
+    }
+
+    public ResultSet getRe_columnlisttop() {
+        return re_columnlisttop;
+    }
+
+    public ResultSet getRe_showlist() {
+        return re_showlist;
+    }
+
+    public ResultSet getRe_search() {
+        return re_search;
+    }
+
+    public ResultSetMetaData getRsmd() {
+        return rsmd;
+    }
+
+    public String[][] getDataarray() {
+        return dataarray;
+    }
+
+    public String[] getColumnarray() {
+        return columnarray;
+    }
+
+    public int getRowCounter() {
+        return rowCounter;
+    }
+
+    public int getColumnCounter() {
+        return columnCounter;
+    }
     ResultSetMetaData rsmd;
     String dataarray[][];
     String columnarray[];

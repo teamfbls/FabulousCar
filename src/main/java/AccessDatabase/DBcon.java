@@ -10,6 +10,7 @@ import java.sql.*;
  * @author THaskioglu
  */
 public class DBcon {
+    private static DBcon instance;
     protected Connection con;
     protected Statement stmt;
     private String serverName="localhost";
@@ -56,6 +57,13 @@ public class DBcon {
     
     return stmt;
     
+    }
+    
+     public static DBcon getInstance(){
+        if (instance == null){
+            instance = new DBcon();
+        }
+        return instance;
     }
     
 }
