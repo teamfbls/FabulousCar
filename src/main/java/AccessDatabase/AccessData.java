@@ -3,6 +3,7 @@ import java.sql.*;
 public class AccessData implements AccessDataInterface{
  
     
+    
     DBcon dbconnection=DBcon.getInstance();
     private ResultSet re_hersteller, re_farbe, re_baujahr, re_kraftstoff, re_leistung, re_modell, re_tueren, re_zustand,result,re_top,re_suche;  
 

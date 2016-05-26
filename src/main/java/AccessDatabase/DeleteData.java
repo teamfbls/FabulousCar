@@ -11,6 +11,7 @@ package AccessDatabase;
  */
 public class DeleteData implements DeleteDataInterface{
     
+    
     String id,deleteStatement;
     DBcon dbconnection=DBcon.getInstance();
     

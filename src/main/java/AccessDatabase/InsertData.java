@@ -16,6 +16,7 @@ import java.util.Date;
  */
 public class InsertData implements InsertDataInterface{
 
+    
     DBcon dbconnection=DBcon.getInstance();
     DataModel datamodel;
     String insertStatement,

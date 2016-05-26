@@ -10,6 +10,7 @@ import java.sql.*;
  * @author THaskioglu
  */
 public class DBcon {
+    
     private static DBcon instance;
     protected Connection con;
     protected Statement stmt;
