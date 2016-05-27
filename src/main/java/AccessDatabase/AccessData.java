@@ -119,7 +119,8 @@ public class AccessData implements AccessDataInterface{
 "zustand.Zustand as Zustand,\n" +
 "auto.Beschreibung as Beschreibung,\n"+
 "auto.Erstellungsdatum as Erstellungsdatum,\n" +
- "auto.pic_path as Picturepfad\n"+
+"auto.pic_path as Picturepfad,\n"+
+"auto.verkauft as Verfuegbar\n"+
 "from auto \n" +
 "inner join baujahr on baujahr.Baujahrid=auto.Baujahrid \n" +
 "inner join Farbe on Farbe.Farbeid=auto.Farbeid\n" +

@@ -183,7 +183,8 @@
 </div>
     
        
-        <input class="btn btn-danger btn-lg" type="submit" value="Löschen" name="buttonlo"/>
+        <input class="btn btn-danger btn-lg" type="submit" value="Loeschen" name="buttonlo"/>
+        <input class="btn btn-warning btn-lg" type="submit" value="Verkaufen" name="buttonlo"/>
     </form:form>
         
            </div>

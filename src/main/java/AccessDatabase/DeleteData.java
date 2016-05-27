@@ -42,5 +42,24 @@ public class DeleteData implements DeleteDataInterface{
 
     
     }
+     public void doVerkaufData()throws Exception{
+    
+         if(id.isEmpty()){
+         throw new Exception();
+         }
+
+            deleteStatement = "Update auto set verkauft=1 where auto.id="+id+"";
+            dbconnection.getStmt();
+            dbconnection.stmt.executeUpdate( deleteStatement);
+  
+
+            if (dbconnection.stmt != null) {
+
+                dbconnection.disConnectDB();
+
+            }
+
+    
+    }
     
 }

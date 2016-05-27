@@ -7,6 +7,7 @@ package controllers;
 
 import AccessDatabase.DeleteData;
 import AccessDatabase.InsertData;
+import com.mycompany.mavenproject1.Createpdf;
 import com.mycompany.mavenproject1.DataModel;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -140,7 +141,13 @@ public class IndexController {
 
         return new DataSearch();
     }
-
+@RequestMapping(value = "/pdfsuc", method = RequestMethod.POST)
+    public ModelAndView pdfcrea(ModelAndView m,HttpServletRequest request){
+    Createpdf crp=new Createpdf();
+    crp.createPDF("Newfile.pdf");
+    return m;
+    }
+    
     @RequestMapping(value = "/writedata", method = RequestMethod.POST)
     public ModelAndView writeDataForm(@ModelAttribute("baujahr") DataModel bau, HttpServletRequest request) {
         ModelAndView model = new ModelAndView("writedata");
@@ -236,15 +243,24 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/listallsuc", method = RequestMethod.POST)
-    public ModelAndView fddd(ModelAndView m, @RequestParam(value = "abc") String abc) {
+    public ModelAndView fddd(ModelAndView m, @RequestParam(value = "abc") String abc,@RequestParam(value = "buttonlo") String butt) {
+        DeleteData del = new DeleteData((abc));
         try {
             if (abc.isEmpty()) {
                 m.setViewName("nosuccessform");
                 return m;
             } else {
-                DeleteData del = new DeleteData((abc));
+                if(butt.equals("Loeschen")){
+                
                 del.doDeleteData();
                 m.setViewName("listallsuc");
+                return m;
+                }
+                if(butt.equals("Verkaufen")){
+                    
+                del.doVerkaufData();
+                return m;
+                }
                 return m;
             }
         } catch (Exception ex) {

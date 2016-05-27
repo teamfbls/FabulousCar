@@ -144,14 +144,18 @@
 
 
                     <c:forEach var="rows" items="${listrow[0]}" varStatus="status">
-                        
+
                         <div class="row">
                             <div class="table-responsive">
                                 <div class="col-xs-4 col-md-6">
                                     <table  class="table table-bordered">
 
 
-                                        <tr><img width="200" height="140" alt="Generic placeholder image" src="pic/forsale.png" class="img-rounded" ></tr>
+                                        <tr></tr>
+                                        <form:form action="/mavenproject1/pdfsuc.html" method="Post">
+
+                                            <tr><input type="image"  width="35" height="35" name="submit" src="pic/pdfbutton.png" border="0" alt="Submit" /></tr>
+                                        </form:form>
                                         <c:forEach var="column" items="${listhead}" varStatus="statusHead">
                                             <tr><td>   ${column}</td>
                                                 <c:forEach var="row"  items="${listrow[statusHead.index][status.index]}" varStatus="status2" >    
@@ -160,20 +164,32 @@
                                                         ${row}
                                                     </td> 
                                                     <c:if test="${ind ==13}">
-                                                    <td>
-                                                        <c:set var="g" value="webapp\\"></c:set>
-                                                        <c:set var="path" value="${fn:substringAfter(row,g)}"></c:set>
-                                                       
-                                                            <img width="200" height="140" alt="Generic placeholder image" src="${fn:replace(path,"\\","//")}" class="img-rounded" >
-                                                            
-                                                            
-                                                        
-                                                        
-                                                    </td>
+                                                        <td>
+                                                            <c:set var="g" value="webapp\\"></c:set>
+                                                            <c:set var="path" value="${fn:substringAfter(row,g)}"></c:set>
+
+                                                                <img width="200" height="140" alt="" src="${fn:replace(path,"\\","//")}" class="img-rounded" >
+
+
+
+
+                                                        </td>
                                                     </c:if>
+                                                    <c:if test="${ind==14}">
+                                                        <c:choose>
+                                                            <c:when test="${row==1}">
+                                                                <td>  <img src="pic/sign_available_red.png" alt=""/></td>
+                                                            </c:when>
+                                                                <c:otherwise>
+                                                                <td>
+                                                                <img src="pic/sign_available.png" alt=""/></td>
+                                                                </c:otherwise>
+                                                         </c:choose>
+                                                        </c:if>
+
                                                 </tr>
                                             </c:forEach>
-                                               
+
                                         </c:forEach>
 
                                     </table>

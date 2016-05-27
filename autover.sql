@@ -18,8 +18,6 @@
 --
 -- Table structure for table `auto`
 --
-create database autover;
-use autover;
 
 DROP TABLE IF EXISTS `auto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -38,6 +36,7 @@ CREATE TABLE `auto` (
   `Beschreibung` varchar(255) DEFAULT NULL,
   `Erstellungsdatum` datetime DEFAULT NULL,
   `pic_path` varchar(2083) DEFAULT NULL,
+  `verkauft` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fg_auto_modell` (`HerstellerModellid`),
   KEY `fg_auto_baujahr` (`Baujahrid`),
@@ -53,7 +52,7 @@ CREATE TABLE `auto` (
   CONSTRAINT `fg_auto_modell` FOREIGN KEY (`HerstellerModellid`) REFERENCES `modell` (`HerstellerModellid`),
   CONSTRAINT `fg_auto_tueren` FOREIGN KEY (`Tuerenid`) REFERENCES `tueren` (`Tuerenid`),
   CONSTRAINT `fg_auto_zustand` FOREIGN KEY (`Zustandid`) REFERENCES `zustand` (`Zustandid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +61,7 @@ CREATE TABLE `auto` (
 
 LOCK TABLES `auto` WRITE;
 /*!40000 ALTER TABLE `auto` DISABLE KEYS */;
-INSERT INTO `auto` VALUES (1,154754,1,12,1,1,11,55000,2,2,'FFFFF','2015-11-10 19:45:24',NULL),(2,50004,7,8,1,1,5,45454,1,2,'','2015-12-02 21:36:29',NULL),(5,4541,22,22,1,1,11,5464,1,1,'','2016-04-23 15:30:33','null'),(6,343453,22,22,1,1,11,34535,1,1,'','2016-04-23 15:38:17','null'),(7,453155,22,22,1,1,11,543122,1,1,'','2016-04-24 14:19:16',''),(8,45312,22,22,1,1,11,876451,1,1,'','2016-04-24 14:20:34',''),(9,45312,22,22,1,1,11,421254,1,1,'','2016-04-24 14:25:48','C:\\Users\\Thaskioglu\\Documents\\NetBeansProjects\\mavenproject1\\mavenproject1\\src\\main\\webapp\\upload_images\\Dijkstra.jpg');
+INSERT INTO `auto` VALUES (1,154754,1,12,1,1,11,55000,2,2,'FFFFF','2015-11-10 19:45:24',NULL,''),(2,50004,7,8,1,1,5,45454,1,2,'','2015-12-02 21:36:29',NULL,'\0'),(5,4541,22,22,1,1,11,5464,1,1,'','2016-04-23 15:30:33','null','\0'),(6,343453,22,22,1,1,11,34535,1,1,'','2016-04-23 15:38:17','null','\0'),(7,453155,22,22,1,1,11,543122,1,1,'','2016-04-24 14:19:16','','\0'),(8,45312,22,22,1,1,11,876451,1,1,'','2016-04-24 14:20:34','','\0'),(10,5548,22,22,1,1,11,4545,1,1,'','2016-05-28 00:09:13','C:\\Users\\Thaskioglu\\Documents\\NetBeansProjects\\mavenproject1\\mavenproject1\\src\\main\\webapp\\upload_images\\basic_beetle.png','\0');
 /*!40000 ALTER TABLE `auto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,4 +269,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-26 21:23:44
+-- Dump completed on 2016-05-28  0:18:35
