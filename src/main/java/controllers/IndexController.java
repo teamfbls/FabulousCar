@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.mycompany.mavenproject1.DataFetch;
 import com.mycompany.mavenproject1.DataSearch;
+import com.mycompany.mavenproject1.FacadeClass;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class IndexController {
     int db;
     DataModel datamodel = new DataModel();
     DataSearch ds = new DataSearch();
+    FacadeClass facade=new FacadeClass();
     List<String> list = new ArrayList<String>();
 
     String contenttype;
@@ -62,42 +64,42 @@ public class IndexController {
     @RequestMapping(value = "/newjsp", method = RequestMethod.GET)
     public ModelAndView getAdmissionForm(ModelAndView model, HttpServletRequest request) {
         try {
-            DataFetch df = new DataFetch();
+            FacadeClass facade=new FacadeClass();
 
             Map<String, String> mapFile = new HashMap<String, String>();
             datafilearray = picupload(request);
             mapFile = rechnedropdown(mapFile, datafilearray);
 
             Map< String, String> mapBaujahr = new HashMap<String, String>();
-            dataarray1 = df.setDataBaujahr();
+            dataarray1 = facade.setDataBaujahr();
             mapBaujahr = rechnedropdown(mapBaujahr, dataarray1);
 
             Map< String, String> mapHersteller = new HashMap<String, String>();
-            dataarray2 = df.setDataHersteller();
+            dataarray2 = facade.setDataHersteller();
             mapHersteller = rechnedropdown(mapHersteller, dataarray2);
 
             Map< String, String> mapFarbe = new HashMap<String, String>();
-            dataarray3 = df.setDataFarbe();
+            dataarray3 = facade.setDataFarbe();
             mapFarbe = rechnedropdown(mapFarbe, dataarray3);
 
             Map< String, String> mapKraftstoff = new HashMap<String, String>();
-            dataarray4 = df.setDataKraftstoff();
+            dataarray4 = facade.setDataKraftstoff();
             mapKraftstoff = rechnedropdown(mapKraftstoff, dataarray4);
 
             Map< String, String> mapLeistung = new HashMap<String, String>();
-            dataarray5 = df.setDataLeistung();
+            dataarray5 = facade.setDataLeistung();
             mapLeistung = rechnedropdown(mapLeistung, dataarray5);
 
             Map< String, String> mapModell = new HashMap<String, String>();
-            dataarray6 = df.setDataModell();
+            dataarray6 = facade.setDataModell();
             mapModell = rechnedropdown(mapModell, dataarray6);
 
             Map<String, String> mapTueren = new HashMap<String, String>();
-            dataarray7 = df.setDataTueren();
+            dataarray7 = facade.setDataTueren();
             mapTueren = rechnedropdown(mapTueren, dataarray7);
 
             Map<String, String> mapZustand = new HashMap<String, String>();
-            dataarray8 = df.setDataZustand();
+            dataarray8 = facade.setDataZustand();
             mapZustand = rechnedropdown(mapZustand, dataarray8);
 
             model.addObject("mapBaujahr", mapBaujahr);
@@ -154,8 +156,7 @@ public class IndexController {
 
         try {
             String chosenpath=searchpic(request, bau);
-            InsertData ins = new InsertData(bau,chosenpath);
-            ins.doInsertData();
+            facade.doInsert(bau, chosenpath);
             return model;
         } catch (Exception ex) {
             model.addObject("errorcode", ex.toString());
@@ -167,7 +168,7 @@ public class IndexController {
 
     @RequestMapping(value = "/listall", method = RequestMethod.GET)
     public ModelAndView ff(ModelAndView m) {
-
+        FacadeClass facade=new FacadeClass();
         try {
             if (list.isEmpty()) {
 
@@ -175,11 +176,11 @@ public class IndexController {
 
                 list.clear();
             }
-            DataFetch df = new DataFetch();
-            dataarray10 = df.setColumnList();
+           
+            dataarray10 = facade.setColumnList();
 
             getColumnArralist();
-            dataarray9 = df.setList();
+            dataarray9 = facade.setList();
             m.addObject("listrowlength", dataarray9.length - (1));
             m.addObject("listhead", list);
             m.addObject("listrow", dataarray9);
@@ -200,11 +201,11 @@ public class IndexController {
 
                 list.clear();
             }
-            DataFetch df = new DataFetch();
-            dataarray10 = df.setColumnList();
+           FacadeClass facade=new FacadeClass();
+            dataarray10 = facade.setColumnList();
 
             getColumnArralist();
-            dataarray11 = df.setShowList();
+            dataarray11 = facade.setShowList();
             m.addObject("listrowlength", dataarray10.length - (1));
             m.addObject("listhead", list);
             m.addObject("listrow", dataarray11);
@@ -226,11 +227,11 @@ public class IndexController {
 
                 list.clear();
             }
-            DataFetch df = new DataFetch();
-            dataarray10 = df.setColumnListTop5();
+           FacadeClass facade=new FacadeClass();
+            dataarray10 = facade.setColumnListTop5();
 
             getColumnArralist();
-            dataarray9 = df.setTop();
+            dataarray9 = facade.setTop();
             m.addObject("listrowlength", dataarray10.length - (1));
             m.addObject("listhead", list);
             m.addObject("listrow", dataarray9);
@@ -244,7 +245,7 @@ public class IndexController {
 
     @RequestMapping(value = "/listallsuc", method = RequestMethod.POST)
     public ModelAndView fddd(ModelAndView m, @RequestParam(value = "abc") String abc,@RequestParam(value = "buttonlo") String butt) {
-        DeleteData del = new DeleteData((abc));
+        
         try {
             if (abc.isEmpty()) {
                 m.setViewName("nosuccessform");
@@ -252,13 +253,13 @@ public class IndexController {
             } else {
                 if(butt.equals("Loeschen")){
                 
-                del.doDeleteData();
+                facade.doDeleteData(abc);
                 m.setViewName("listallsuc");
                 return m;
                 }
                 if(butt.equals("Verkaufen")){
                     
-                del.doVerkaufData();
+                facade.doVerkaufData(abc);
                 return m;
                 }
                 return m;
@@ -274,8 +275,8 @@ public class IndexController {
     @RequestMapping(value = "/submitSearch", method = RequestMethod.POST)
     public ModelAndView sreach(ModelAndView m, @ModelAttribute("datasearch") DataSearch ds) {
         try {
-            DataFetch df = new DataFetch();
-            dataarray10 = df.setColumnList();
+           
+            dataarray10 = facade.setColumnList();
             if (dataarray10 == null) {
 
             }
@@ -286,10 +287,10 @@ public class IndexController {
                 list.clear();
             }
 
-            dataarray10 = df.setColumnList();
+            dataarray10 = facade.setColumnList();
 
             getColumnArralist();
-            dataarray9 = df.getSearch(ds.getDatasuchwort(), ds.getDatacolumn());
+            dataarray9 = facade.getSearch(ds.getDatasuchwort(), ds.getDatacolumn());
             m.addObject("listrowlength", dataarray9.length - (1));
             m.addObject("listhead", list);
             m.addObject("listrow", dataarray9);
@@ -309,8 +310,8 @@ public class IndexController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView sreachpage(ModelAndView m, @ModelAttribute("datasearch") DataSearch ds) {
         try {
-            DataFetch df = new DataFetch();
-            dataarray10 = df.setColumnList();
+            
+            dataarray10 = facade.setColumnList();
             m.addObject("mapcolumn", dataarray10);
             m.addObject("datacolumn", ds);
             return m;
